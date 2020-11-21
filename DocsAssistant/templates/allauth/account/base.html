@@ -16,6 +16,14 @@
   <body>
     <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
       <div class="container">
+        {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">  <!-- singular -->
+                  <button class="close" data-dismiss="alert">×</button>
+                  {{ message|safe }}
+              </div>
+          {% endfor %}
+      {% endif %}
         <div class="card login-card">
           <div class="row no-gutters">
             <div class="col-md-5">
