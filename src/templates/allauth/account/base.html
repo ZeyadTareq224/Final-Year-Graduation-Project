@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'user_assets/css/login.css' %}">
+    <style>
+      
+      body{
+        background-color: #1a2c40;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-4">
+        
+      </div>
+      <div class="col-4">
+        <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+          <div>
+            {% if messages %}
+              {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">  <!-- singular -->
+                      <button class="close" data-dismiss="alert">×</button>
+                      {{ message|safe }}
+                  </div>
+              {% endfor %}
+          {% endif %}
+            <div class="card login-card">
+              <div class="row no-gutters">
+                
+                <div class="col-md-12">
+                  <div class="card-body">
+                    <div class="brand-wrapper">
+                      <a href="{% url 'home' %}">
+                        <img style="height: 100px; width: auto;" src="{% static 'site_assets/img/assets/logo_dark1.png' %}" alt="logo" class="logo">
+                      </a>
+                    </div>
+                      {% block body %}
+                      {% block content %}
+                      {% endblock %}
+                
+                      {% endblock %}
+                      {% block extra_body %}
+                      {% endblock %}
+                      
+                      <nav class="login-card-footer-nav">
+                        <a href="#!">Terms of use.</a>
+                        <a href="#!">Privacy policy</a>
+                      </nav>
+                  </div>
+                </div>
+            </div>
+          </div>
+            
+          </div>
+        </main>
+      </div>
+      <div class="col-4"></div>
+      
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

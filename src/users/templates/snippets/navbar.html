@@ -1,0 +1,49 @@
+{% load static %}
+<nav class="navbar nav-down" data-fullwidth="true" data-menu-style="transparent" data-animation="shrink">
+                                        
+    <div class="container">
+
+        <div class="navbar-header">
+            <div class="container">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                </button>
+                <a class="navbar-brand to-top" href="{% url 'home' %}"><img src="{% static 'site_assets/img/assets/logo_light1.png' %}" class="logo-light" alt="#"><img src="{% static 'site_assets/img/assets/logo_dark1.png' %}" class="logo-dark" alt="#"></a>
+            </div>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="container">
+                <ul class="nav navbar-nav menu-right">
+
+                    
+                    <li><a href="#" target="_self">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li class="dropdown megamenu vos">
+                        <a class="dropdown-toggle">Services<i class="ion-ios-arrow-down" href="#services"></i></a>
+                        <ul class="dropdown-menu fullwidth">
+                            <li class="megamenu-content withdesc">
+                                <div class="col-md-3 mg-col">
+                                    <ul>
+                                        <li><a href="predictions.html">AI Advice</a></li>
+                                        <li><a href="livePrice.html">Current Price</a></li>
+                                        <li><a href="news.html">Cryptocurrency News</a></li>
+                                        <li><a href="graphs.html">Candlestick Graphs</a></li>
+                                        <li><a href="topGainersLosers.html">Gainers & Losers</a></li>
+                                        <li><a href="https://documenter.getpostman.com/view/14294116/TW6tL9xQ">API</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{% url 'account_login' %}">Login</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
