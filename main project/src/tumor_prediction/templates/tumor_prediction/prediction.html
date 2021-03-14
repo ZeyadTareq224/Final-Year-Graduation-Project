@@ -1,0 +1,124 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<head>
+   
+    <link rel="stylesheet" type="text/css" href="{% static 'site_assets/css/predictions.css' %}">
+</head>
+<style>
+    body{background-color: #ffffff;}
+</style>
+
+<section id="hero" class="hero-fullscreen parallax" data-overlay-dark="7">
+    <div class="background-image">
+        <img src="{% static 'site_assets/img/backgrounds/bg1.jpg' %}" alt="#">
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% include 'users/snippets/messages.html' %}
+
+            <div class="hero-content-slider mt20" data-autoplay="true" data-speed="4000">
+
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+                
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="container" id="about">
+    <div class="row vertical-align">
+
+        <div class="col-md-6 pr30 mt40 mb40">
+            <h2><strong>BCCP</strong><br><span class="color" style="text-transform: uppercase;">AI Advice</span></h2>
+            <br>
+            <br>
+            <p>Stuck on what cryptocurrency to buy and invest in to earn the maximum? Have no prior knowledge in investing in cryptocurrencies? We got your back.</p>
+            <p>Cryptant provides a free AI advicer for almost every cryptocurrency and gives you the best possible result with options like <strong>whether to buy or sell</strong>, <strong>how much time period to hold the cryptocurrencies</strong>, <strong>average closing price of last 10 days</strong> and many others. All these responses comes from our highly trained AI made just for our users profit.</p>
+            <p><strong>Note: </strong>Market prices are decided on external forces too like natural calamities!</p>
+        </div>
+        <a href="#main" id="mainBtn" class="btn btn-lg btn-primary btn-scroll">Get Started</a>        
+    </div>
+    
+</div>
+
+<hr>
+
+
+<div class="main" id="main">
+    <a href="" class="btn btn-lg btn-primary btn-scroll">Get Instructions</a>
+
+    <center><h2 id="titlePredict">Make Your Prediction <span class="material-icons">
+        science
+        </span></h2> </center>
+    <div class="row">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="card">
+                        <div class="card-body">
+                            <table id="tableMain">
+                                <tr>
+                                    {% for field in form %}  
+                                    <div class="form-group col-md-6 mb-0">
+                                        <tr id="particular">
+                                            <td id="particular">{{ field|as_crispy_field }}</td>
+                                        </tr>
+                                    </div>
+                                    
+                                    {% endfor %}
+                                </tr>
+                                
+                            </table>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Predict</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table id="tableMain">
+            <tr>
+                <th id="particular">Prediction</th>
+            </tr>
+            <tr>
+                {% if prediction %}
+                <td id="coinSymbol">{{prediction}}</td>
+                {% else %}
+                <td id="coinSymbol">...</td>
+                {% endif %}
+            </tr>
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <hr>
+</div>
+
+{% endblock %}
