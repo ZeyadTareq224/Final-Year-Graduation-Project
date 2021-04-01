@@ -1,6 +1,6 @@
 # Final-Year-Graduation-Project
 
-### 1- fork the reposiror
+### 1- fork the repo
 ### 2- clone your fork
 ### 3- create virtual environemt
 ### 4- activate virtual environment
