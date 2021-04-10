@@ -64,25 +64,28 @@ def update_question(request, question_id):
 
 
 def delete_question(request, question_id):
-    question = get_object_or_404(Question, question_id)
+    question = get_object_or_404(Question, id=question_id)
+    print("hahahahah")
     if request.user == question.user:
         if request.method == "POST":
             question.delete()
             messages.success(request, "Question deleted successfully.")
             return redirect('questions')
-    context = {'question': question}
+    context = {
+            'question': question,
+            'question_id': question_id
+        }
     return render(request, 'questions/delete_question.html', context)
 
 
-def upvote(request, question_id):
-    answer = get_object_or_404(Answer, id=question_id)
+def upvote(request, answer_id, question_id):
+    answer = get_object_or_404(Answer, id=answer_id)
     user = request.user
 
     upvotes = UpVote.objects.filter(user=user, answer=answer)
     downvotes = DownVote.objects.filter(user=user, answer=answer)
     if (not downvotes):
         if request.method == "POST" and (not upvotes):
-            print("user have voted before")
             upvote = UpVote(user=user, answer=answer)
             upvote.save()
             messages.success(request, "Answer Upvoted successfully.")
@@ -100,8 +103,8 @@ def upvote(request, question_id):
     
 
 
-def downvote(request, question_id):
-    answer = get_object_or_404(Answer, id=question_id)
+def downvote(request, answer_id, question_id):
+    answer = get_object_or_404(Answer, id=answer_id)
     user = request.user
     downvotes = DownVote.objects.filter(user=user, answer=answer)
     upvotes = UpVote.objects.filter(user=user, answer=answer)
@@ -118,7 +121,7 @@ def downvote(request, question_id):
                 messages.success(request, "Your Downvote deleted successfully.")
                 return redirect("question-details", question_id)
     else:
-        messages.info(request, "You upvoted this answer in order to downvote, it please delete your upvote first.")
+        messages.warning(request, "You upvoted this answer in order to downvote, it please delete your upvote first.")
         return redirect("question-details", question_id)           
     return redirect("question-details", question_id)
 

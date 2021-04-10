@@ -137,9 +137,9 @@
                 aria-labelledby="dropdownMenuLink">
                 <div class="dropdown-header">Question Management:</div>
                 <a class="dropdown-item" href="{% url 'question-details' question.id %}">Read More</a>
-                <a class="dropdown-item" href="#">Update</a>
+                <a class="dropdown-item" href="{% url 'update-question' question.id %}">Update</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Delete</a>
+                <a class="dropdown-item" href="{% url 'delete-question' question.id %}">Delete</a>
             </div>
         </div>
     </div>
@@ -188,8 +188,8 @@
                     </div> 
                     <div class="row">
                         <div class="col-3">
-                            <form method="POST" action="{% url 'upvote' question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.upvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_up</span></button></form>
-                            <form method="POST" action="{% url 'downvote' question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.downvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_down</span></button></form>
+                            <form method="POST" action="{% url 'upvote' answer.id question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.upvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_up</span></button></form>
+                            <form method="POST" action="{% url 'downvote' answer.id question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.downvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_down</span></button></form>
                         </div>
                     </div>
                 <p class="be-comment-text">

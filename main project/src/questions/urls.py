@@ -10,8 +10,8 @@ urlpatterns = [
     path('delete/<int:question_id>', views.delete_question, name="delete-question"),
 
     # votes urls
-    path('upvote/<int:question_id>/', views.upvote, name="upvote"),
-    path('downvote/<int:question_id>/', views.downvote, name="downvote"),
+    path('upvote/<int:answer_id>/<int:question_id>/', views.upvote, name="upvote"),
+    path('downvote/<int:answer_id>/<int:question_id>/', views.downvote, name="downvote"),
 
     # answers urls
     path('update-answer/<int:answer_id>/<int:question_id>/', views.update_answer, name="update_answer"),
