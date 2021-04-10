@@ -20,7 +20,7 @@
                 <ul class="nav navbar-nav menu-right">
 
                     
-                    <li><a href="#" target="_self">Home</a></li>
+                    <li><a href="{% url 'home' %}" target="_self">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li class="dropdown megamenu vos">
                         <a class="dropdown-toggle">Services<i class="ion-ios-arrow-down" href="#services"></i></a>
@@ -29,7 +29,7 @@
                                 <div class="col-md-3 mg-col">
                                     <ul>
                                         <li><a href="{% url 'BCTest' %}">AI Advice</a></li>
-                                        <li><a href="livePrice.html">Current Price</a></li>
+                                        <li><a href="{% url 'questions' %}">Q&A Section</a></li>
                                         <li><a href="news.html">Cryptocurrency News</a></li>
                                         <li><a href="graphs.html">Candlestick Graphs</a></li>
                                         <li><a href="topGainersLosers.html">Gainers & Losers</a></li>
@@ -39,6 +39,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li><a href="#contact">Contact</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'account_logout' %}">Logout</a></li>

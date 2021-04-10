@@ -1,0 +1,212 @@
+{% extends 'questions/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    body{
+    margin-top:20px;
+    background-color:#e9ebee;
+}
+
+.be-comment-block {
+    margin-bottom: 50px !important;
+    border: 1px solid #edeff2;
+    border-radius: 2px;
+    padding: 50px 70px;
+    border:1px solid #ffffff;
+}
+
+.comments-title {
+    font-size: 16px;
+    color: #262626;
+    margin-bottom: 15px;
+    font-family: 'Conv_helveticaneuecyr-bold';
+}
+
+.be-img-comment {
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.be-ava-comment {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.be-comment-content {
+    margin-left: 80px;
+}
+
+.be-comment-content span {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.be-comment-name {
+    font-size: 13px;
+    font-family: 'Conv_helveticaneuecyr-bold';
+}
+
+.be-comment-content a {
+    color: #383b43;
+}
+
+.be-comment-content span {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.be-comment-time {
+    text-align: right;
+}
+
+.be-comment-time {
+    font-size: 11px;
+    color: #b4b7c1;
+}
+
+.be-comment-text {
+    font-size: 13px;
+    line-height: 18px;
+    color: #7a8192;
+    display: block;
+    background: #f6f6f7;
+    border: 1px solid #edeff2;
+    padding: 15px 20px 20px 20px;
+}
+
+.form-group.fl_icon .icon {
+    position: absolute;
+    top: 1px;
+    left: 16px;
+    width: 48px;
+    height: 48px;
+    background: #f6f6f7;
+    color: #b5b8c2;
+    text-align: center;
+    line-height: 50px;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-bottomleft: 2px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.form-group .form-input {
+    font-size: 13px;
+    line-height: 50px;
+    font-weight: 400;
+    color: #b4b7c1;
+    width: 100%;
+    height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #edeff2;
+    border-radius: 3px;
+}
+
+.form-group.fl_icon .form-input {
+    padding-left: 70px;
+}
+
+.form-group textarea.form-input {
+    height: 150px;
+}
+
+</style>
+
+
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">{{question.title}}</h6>
+        <strong>Published at: {{question.created_at}}</strong>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Question Management:</div>
+                <a class="dropdown-item" href="{% url 'question-details' question.id %}">Read More</a>
+                <a class="dropdown-item" href="#">Update</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Delete</a>
+            </div>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+        {{question.content}}
+    </div>
+    
+</div>
+
+<div>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+    <div class="be-comment-block">
+        <h1 class="comments-title">Answers ({{answers.count}})</h1>
+        {% for answer in answers %}
+        <div class="be-comment">
+            
+            <div class="be-img-comment">	
+                
+                <a style="display: inline-block;" href="blog-detail-2.html">
+                    <img src="{{answer.user.profile.profile_img.url}}" alt="" class="be-ava-comment">
+                </a>
+                
+            </div>
+            
+            <div class="be-comment-content">
+                
+                    <span class="be-comment-name">
+                        <a href="blog-detail-2.html">{{answer.user}}</a>
+                        </span>
+                    <span class="be-comment-time">
+                        <i class="fa fa-clock-o"></i>
+                        {{answer.created_at}}
+                    </span>
+                    
+                    <div class="row">                    
+                    {% if request.user == answer.user %}
+                        <div class="col-2">
+                            <a href="{% url 'delete_answer' answer.id question.id %}" style="display: inline-block;"><span class="material-icons">delete_forever</span></a>
+                            <a href="{% url 'update_answer' answer.id question.id %}"><span class="material-icons">update</span></a>
+                        </div>
+                
+                    {% endif %}
+                    <hr>
+                    </div> 
+                    <div class="row">
+                        <div class="col-3">
+                            <form method="POST" action="{% url 'upvote' question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.upvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_up</span></button></form>
+                            <form method="POST" action="{% url 'downvote' question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.downvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_down</span></button></form>
+                        </div>
+                    </div>
+                <p class="be-comment-text">
+                   {{answer.answer}}
+                </p>
+
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+        <form method="POST" class="form-block">
+                {% csrf_token %}
+                {{answer_form|crispy}}
+            
+                <input class="btn btn-primary" type="submit" value="Submit"/>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

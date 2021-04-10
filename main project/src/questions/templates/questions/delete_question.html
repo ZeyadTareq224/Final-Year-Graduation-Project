@@ -1,0 +1,11 @@
+{% extends 'questions/base.html' %}
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Update</button>
+    <a href="{% url 'question-details' question.id %}">Cancel</a>
+</form>
+
+
+{% endblock %}

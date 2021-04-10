@@ -44,18 +44,32 @@ def normal_user_signup(request):
 
 @login_required(login_url='account_login')
 @doctor_required
-def dochome(request):
+def doc_home(request):
     return HttpResponse("<h1>doc home</h1>")
 
 
 
 @login_required(login_url='account_login')
 @normal_user_required
-def userhome(request):
+def user_home(request):
     return HttpResponse("<h1>users home</h1>")
 
+
+@login_required(login_url='account_login')
+def admin_home(request):
+    if request.user.is_superuser:
+        return render(request, 'users/dashboard/admin.html')
+    return render(request, 'users/request_errors/request_unauthorized.html', status=401)  
+
+
+
+
+
 ##########  REQUEST ERORR HANDLERS  ##########
+
+
 def unauthorized(request):
     return render(request, 'users/request_errors/request_unauthorized.html', status=401)
+
 
 ##########  END REQUEST ERORR HANDLERS  ##########

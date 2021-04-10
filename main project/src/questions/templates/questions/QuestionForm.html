@@ -1,0 +1,14 @@
+{% extends 'users/dashboard/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Create Article</h1>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+
+{% endblock %}

@@ -10,7 +10,8 @@ urlpatterns = [
 
 
     path('', views.home_page, name="home"),
-    path('doc/', views.dochome, name="dochome"),
-    path('usr/', views.userhome, name="usrhome"),
+    path('doc/', views.doc_home, name="dochome"),
+    path('usr/', views.user_home, name="usrhome"),
+    path('admin-dashboard/', views.admin_home, name="adminhome"),
     path('UA/', views.unauthorized, name="unauthorized")
 ]
