@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('Ai-Advice/', include('tumor_prediction.urls')),
     path('questions/', include('questions.urls')),
+    path('clinics/', include('clinics.urls')),
 ]
 
 

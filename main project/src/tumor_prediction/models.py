@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from clinics.models import Clinic
 # Create your models here.
 User = get_user_model()
 
 class BCTest(models.Model):
-    doctor = models.ForeignKey(User, on_delete=models.CASCADE)
+    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE)
+    patient = models.ForeignKey(User, on_delete=models.CASCADE)
 
     radius_mean = models.CharField(max_length=255)
     texture_mean = models.CharField(max_length=255)

@@ -1,0 +1,10 @@
+{% extends 'clinics/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-block btn-primary" type="submit">Submit</button>
+    </form>
+{% endblock %}
+    

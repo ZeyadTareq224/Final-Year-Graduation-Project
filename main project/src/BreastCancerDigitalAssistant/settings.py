@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'users',
     'tumor_prediction',
     'questions',
+    'clinics',
 ]
 
 MIDDLEWARE = [
