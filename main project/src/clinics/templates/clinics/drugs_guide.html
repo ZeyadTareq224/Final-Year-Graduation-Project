@@ -1,0 +1,312 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+	<meta charset="utf-8">
+	<title>BCC | Your Digital Crypto Assistant</title>
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="BCCP | Your Virtual Breast Cancer Assistant">
+	<meta property="og:description" content="BCCP is a website providing several services that people with breast cancer will find a community and help.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+	<link href="{% static 'site_assets/img/assets/favicon.png' %}" rel="icon" type="image/png">
+	<link href="{% static 'site_assets/css/init.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'site_assets/css/ion-icons.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'site_assets/css/etline-icons.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'site_assets/css/theme.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'site_assets/css/custom.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'site_assets/css/colors/purple.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'site_assets/css/index.css' %}" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRaleway:400,100,200,300%7CHind:400,300" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body data-fade-in="true">
+
+	<div class="pre-loader"><div></div></div>
+
+
+	{% load static %}
+	<nav style="background-color: black; " class="navbar nav-down" data-fullwidth="true" data-menu-style="transparent" data-animation="shrink">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<div class="container">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar top-bar"></span>
+						<span class="icon-bar middle-bar"></span>
+						<span class="icon-bar bottom-bar"></span>
+					</button>
+					<a class="navbar-brand to-top" href="{% url 'home' %}"><img src="{% static 'site_assets/img/assets/logo_light1.png' %}" class="logo-light" alt="#"><img src="{% static 'site_assets/img/assets/logo_dark1.png' %}" class="logo-dark" alt="#"></a>
+				</div>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<div class="container">
+					<ul style="float: right; !important" class="nav navbar-nav menu-right">
+
+
+						<li><a href="{% url 'home' %}" target="_self">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li class="dropdown megamenu vos">
+							<a class="dropdown-toggle">Services<i class="ion-ios-arrow-down" href="#services"></i></a>
+							<ul class="dropdown-menu fullwidth">
+								<li class="megamenu-content withdesc">
+									<div class="col-md-3 mg-col">
+										<ul>
+											<li><a href="{% url 'BCTest' %}">AI Advice</a></li>
+											<li><a href="{% url 'questions' %}">Q&A Section</a></li>
+											<li><a href="{% url 'clinics' %}">Clinics Center</a></li>
+											<li><a href="{% url 'drugs_guide' %}">Drugs Guid</a></li>
+											<li><a href="https://documenter.getpostman.com/view/14294116/TW6tL9xQ">API</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</li>
+
+						<li><a href="#contact">Contact</a></li>
+						{% if request.user.is_authenticated %}
+						<li><a href="{% url 'account_logout' %}">Logout</a></li>
+						{% else %}
+						<li><a href="{% url 'account_login' %}">Login</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+
+
+	<section id="about" class="pt100 pb90">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-12 text-center pb20">
+					<h2>BCCP<br><strong>Drugs Guide.</strong></h2>
+					<hr>
+					<ul class="nav nav-tabs">
+						<li><a data-toggle="tab" href="#menu1">Drugs Approved to Prevent Breast Cancer</a></li>
+						<li><a data-toggle="tab" href="#menu2">Drugs Approved to Treat Breast Cancer</a></li>
+						<li><a data-toggle="tab" href="#menu3">Drug Combinations Used in Breast Cancer</a></li>
+					</ul>
+
+					<div class="tab-content">
+						
+						<div id="menu1" class="tab-pane fade">
+							<h3>Drug Guide Provided By NCI (National Cancer Inistitute).</h3>
+							<table id="example1" class="display" style="width:100%">
+						        <thead>
+						            <tr>
+						                <th>Drug Name</th>
+						                <th>Information Link</th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						        	{% for drug in drugs1 %}
+						            <tr>
+							            <td>{{drug.name}}</td>
+							            <td><a href="{{drug.url}}">{{drug.url}}</a></td>
+						            </tr>
+						            {% endfor %}
+						        </tbody>
+						        <tfoot>
+						            <tr>
+						                <th>Drug Name</th>
+						                <th>Information Link</th>
+						            </tr>
+						        </tfoot>
+						    </table>
+						</div>
+						<div id="menu2" class="tab-pane fade">
+							<h3>Drug Guide Provided By NCI (National Cancer Inistitute).</h3>
+							<table id="example2" class="display" style="width:100%">
+						        <thead>
+						            <tr>
+						                <th>Drug Name</th>
+						                <th>Information Link</th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						        	{% for drug in drugs2 %}
+						            <tr>
+							            <td>{{drug.name}}</td>
+							            <td><a href="{{drug.url}}">{{drug.url}}</a></td>
+						            </tr>
+						            {% endfor %}
+						        </tbody>
+						        <tfoot>
+						            <tr>
+						                <th>Drug Name</th>
+						                <th>Information Link</th>
+						            </tr>
+						        </tfoot>
+						    </table>
+						</div>
+						<div id="menu3" class="tab-pane fade">
+							<h3>Drug Guide Provided By NCI (National Cancer Inistitute).</h3>
+							<table id="example3" class="display" style="width:100%">
+						        <thead>
+						            <tr>
+						                <th>Drug Name</th>
+						                <th>Information Link</th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						        	{% for drug in drugs3 %}
+						            <tr>
+							            <td>{{drug.name}}</td>
+							            <td><a href="{{drug.url}}">{{drug.url}}</a></td>
+						            </tr>
+						            {% endfor %}
+						        </tbody>
+						        <tfoot>
+						            <tr>
+						                <th>Drug Name</th>
+						                <th>Information Link</th>
+						            </tr>
+						        </tfoot>
+						    </table>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</section>
+	<section class="parallax pt100 pb100" data-overlay-dark="9">
+            <div class="background-image">
+                <img src="{% static 'site_assets/img/backgrounds/bg-7.jpg' %}" alt="#">
+            </div>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-sm-8 mr-auto text-center">
+                        <h2>Get Connected<br><strong>Follow Us</strong></h2>
+                        <p class="lead">Get connected with us on social networks!</p>
+                    </div>
+
+                    <div class="col-md-12">
+                        <ul class="connected-icons social-icons">
+
+                            <li class="connected-icon">
+                                <a target="_blank" href="https://www.facebook.com/cryptant.timathon/">
+                                    <i class="ion-social-facebook"></i>
+                                    <h5>Facebook</h5>
+                                    <p>Be Our Friend</p>
+                                </a>
+                            </li>
+
+                            <li class="connected-icon">
+                                <a target="_blank" href="https://youtube.com/techwithtim">
+                                    <i class="ion-social-youtube"></i>
+                                    <h5>Youtube</h5>
+                                    <p>Watch Our Videos</p>
+                                </a>
+                            </li>
+
+                            <li class="connected-icon">
+                                <a target="_blank" href="https://twitter.com/Cryptant3">
+                                    <i class="ion-social-twitter"></i>
+                                    <h5>Twitter</h5>
+                                    <p>Follow Us</p>
+                                </a>
+                            </li>
+
+                            <li class="connected-icon">
+                                <a target="_blank" href="https://www.instagram.com/cryptant/">
+                                    <i class="ion-social-instagram"></i>
+                                    <h5>Instagram</h5>
+                                    <p>See Our Pictures</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+	<section id="contact" class="pt120 pb100">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 text-center pb20">
+                        <h2>Get In Touch<br><strong>Contact Us</strong></h2>
+                        <p class="lead">Got some issues/suggestions? We would like to <span class="color">hear from you</span></p>
+                    </div>
+
+                    <div class="col-md-8 col-md-offset-2 contact box-style">
+                        <div id="message-info"></div>
+                        
+                        <form>
+
+                            <div class="col-sm-12">
+                                <input name="name" id="name" placeholder="Your Name *"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <input name="email" id="email" placeholder="Your Email *"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <input name="phone" id="phone" placeholder="Your Phone"/>
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea name="message" rows="9" id="message" placeholder="Your Message *"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="submit btn btn-lg btn-primary" value="Send Message"/>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+<script src="{% static 'site_assets/js/init.js' %}"></script>
+<script src="{% static 'site_assets/js/scripts.js' %}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>	
+	$(document).ready(function() {
+    $('#example1').DataTable();
+} );
+</script>
+<script>	
+	$(document).ready(function() {
+    $('#example2').DataTable();
+} );
+</script>
+<script>	
+	$(document).ready(function() {
+    $('#example3').DataTable();
+} );
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+

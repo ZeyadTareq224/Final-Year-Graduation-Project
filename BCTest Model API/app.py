@@ -9,7 +9,8 @@ MODEL_PATH = os.path.join(BASE_DIR, 'BCXGBoost.pickle')
 app = Flask(__name__)
 
 
-@app.route('/',methods=['POST'])
+
+@app.route('/predict',methods=['POST'])
 def index():
 	body = request.get_json()
 	radius_mean = float(body.get('radius_mean', None))

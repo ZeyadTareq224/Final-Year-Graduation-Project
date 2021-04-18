@@ -8,10 +8,12 @@ import datetime
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from tumor_prediction.models import BCTest
+from .drugs_scrapper import drugs1, drugs2, drugs3 
 # Create your views here.
 
 def clinics(request):
     clinics = Clinic.objects.all()
+    print(clinics[0])
     context = {'clinics': clinics}
     return render(request, 'clinics/index.html', context)
     
@@ -206,3 +208,10 @@ def BCT_history(request, clinic_id):
     bctests = BCTest.objects.filter(clinic=clinic)
     context = {'bctests': bctests}
     return render(request, 'clinics/bct_history.html', context)
+
+
+def drugs_guide(request):
+    
+    
+    context = {'drugs1':drugs1, 'drugs2':drugs2, 'drugs3': drugs3}
+    return render(request, 'clinics/drugs_guide.html', context)
