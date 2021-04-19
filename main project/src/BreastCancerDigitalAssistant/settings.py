@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django_extensions',
     
     'crispy_forms',
 
@@ -169,3 +170,12 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ##########     END Email SETTINGS   ##########
+
+
+
+##### DJANGO_EXTENSIONS CONFIGS #####
+GRAPH_MODELS = {
+    "all_applications": True,
+    "group_models": True,
+}
+##### END DJANGO_EXTENSIONS CONFIGS #####

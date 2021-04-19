@@ -86,6 +86,7 @@ def create_appointment(request, clinic_id):
     if request.method == "POST":
         new_appointment = Appointment(patient=request.user, clinic=clinic)
         new_appointment.save()
+        send_mail("New Appointment", f"a new appointment got requested from {new_appointment.patient} at {new_appointment.created_at}. check your appointment mangagement page on BCCP.", 'ex.stunex@gmail.com', [clinic.user.email])
         messages.success(request, "Your Have reserved an appointment. wait for a confirmation email with the appointment date and time.")
         return redirect("clinic_details", clinic_id)
     context = {'form': form}
