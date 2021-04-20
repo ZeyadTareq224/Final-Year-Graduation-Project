@@ -35,11 +35,11 @@ def create_clinic(request):
 
 def clinic_details(request, clinic_id):
     clinic = get_object_or_404(Clinic, id=clinic_id)
-
+    patient_appointment = Appointment.objects.filter(clinic=clinic, patient=request.user)
     reviews = ClinicReview.objects.filter(clinic=clinic)
     rating_percentage = get_rating_percentage(reviews)
     form = ClinicReviewForm()
-    if request.user != clinic.user:
+    if request.user != clinic.user and patient_appointment:
         if request.method == "POST":
             form = ClinicReviewForm(request.POST)
             form.instance.clinic = clinic
@@ -212,7 +212,6 @@ def BCT_history(request, clinic_id):
 
 
 def drugs_guide(request):
-    
     
     context = {'drugs1':drugs1, 'drugs2':drugs2, 'drugs3': drugs3}
     return render(request, 'clinics/drugs_guide.html', context)
