@@ -14,3 +14,9 @@ urlpatterns = [
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from schema_graph.views import Schema
+urlpatterns += [
+    # On Django 2+:
+    path("schema/", Schema.as_view()),
+]

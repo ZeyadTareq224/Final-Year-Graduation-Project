@@ -14,7 +14,6 @@ class Question(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     tags = models.ManyToManyField(Tag)
-    #cover_img = models.ImageField(upload_to='media/questions/cover_images/', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

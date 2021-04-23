@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django_extensions',
     
     'crispy_forms',
+    'schema_graph',
+
 
     # local apps
     'users',
