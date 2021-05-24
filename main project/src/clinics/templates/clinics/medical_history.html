@@ -120,7 +120,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{% url 'account_logout' %}" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -150,14 +150,17 @@
 
                     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-<h3>Appoints Management</h3>
+<h3>My Medical History</h3>
 <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Clinic Name</th>
                 <th>Doctor Name</th>
-                <th>Symptoms</th>
-                <th>Prescription</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Appointment Status</th>
+                <th>Action</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -165,8 +168,13 @@
             <tr>
                 <td>{{prescription.clinic}}</td>1
                 <td>{{prescription.clinic.user}}</td>
-                <td>{{prescription.symptoms}}</td>
-                <td>{{prescription.prescription}}</td>
+                <td>{{prescription.appointment.time}}</td>
+                <td>{{prescription.appointment.date}}</td>
+                <td>{{prescription.appointment.status}}</td>
+                <td>
+                    <a class="btn btn-sm btn-success" href="{% url 'view_prescription' prescription.appointment.id %}">View Prescription
+                    </a>
+                </td>
             </tr>
             {% endfor %}
             
@@ -175,8 +183,10 @@
             <tr>
                 <th>Clinic Name</th>
                 <th>Doctor Name</th>
-                <th>Symptoms</th>
-                <th>Prescription</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Appointment Status</th>
+                <th>Action</th>
             </tr>
         </tfoot>
     </table>

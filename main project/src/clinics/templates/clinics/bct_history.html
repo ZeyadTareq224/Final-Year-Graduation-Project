@@ -155,7 +155,7 @@
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
-            <th>Patient Name</th>
+            <th>Clinic Name</th>
             <th>Radius Mean</th>
             <th>Texture Mean</th>
             <th>Perimeter Mean</th>
@@ -167,24 +167,23 @@
             <th>Symmetry Mean</th>
             <th>Fractal Dimension Mean</th>
             <th>Classification</th>
-            <th>Created At</th>
         </tr>
     </thead>
     <tbody>
         {% for bctest in bctests %}
         <tr>
-            <th>bctest.radius_mean</th>
-            <th>bctest.texture_mean</th>
-            <th>bctest.perimeter_mean</th>
-            <th>bctest.area_mean</th>
-            <th>bctest.smoothness_mean</th>
-            <th>bctest.compactness_mean</th>
-            <th>bctest.concavity_mean</th>
-            <th>bctest.concave_points_mean</th>
-            <th>bctest.symmetry_mean</th>
-            <th>bctest.fractal_dimension_mean</th>
-            <th>bctest.classification</th>
-            <th>bctest.created_at</th>
+            <th>{{bctest.clinic}}</th>
+            <th>{{bctest.radius_mean}}</th>
+            <th>{{bctest.texture_mean}}</th>
+            <th>{{bctest.perimeter_mean}}</th>
+            <th>{{bctest.area_mean}}</th>
+            <th>{{bctest.smoothness_mean}}</th>
+            <th>{{bctest.compactness_mean}}</th>
+            <th>{{bctest.concavity_mean}}</th>
+            <th>{{bctest.concave_points_mean}}</th>
+            <th>{{bctest.symmetry_mean}}</th>
+            <th>{{bctest.fractal_dimension_mean}}</th>
+            <th>{{bctest.classification}}</th>
             
         </tr>
         {% endfor %}
@@ -192,7 +191,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <th>Patient Name</th>
+            <th>Clinic Name</th>
             <th>Radius Mean</th>
             <th>Texture Mean</th>
             <th>Perimeter Mean</th>
@@ -204,9 +203,6 @@
             <th>Symmetry Mean</th>
             <th>Fractal Dimension Mean</th>
             <th>Classification</th>
-            <th>Created At</th>
-            
-        
         </tr>
     </tfoot>
 </table>
@@ -261,7 +257,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+   <!-- Bootstrap core JavaScript-->
     <script src="{% static 'dashboard/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>

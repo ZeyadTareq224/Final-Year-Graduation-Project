@@ -51,10 +51,10 @@ INSTALLED_APPS = [
 
 
     # local apps
-    'users',
-    'tumor_prediction',
-    'questions',
-    'clinics',
+    'users.apps.UsersConfig',
+    'tumor_prediction.apps.TumorPredictionConfig',
+    'questions.apps.QyestionsConfig',
+    'clinics.apps.ClinicsConfig',
 ]
 
 MIDDLEWARE = [
@@ -181,3 +181,17 @@ GRAPH_MODELS = {
     "group_models": True,
 }
 ##### END DJANGO_EXTENSIONS CONFIGS #####
+
+##### SECURITY CONFIGS #####
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+
+X_FRAME_OPTIONS = 'DENY'
+
+##### END SECURITY CONFIGS #####

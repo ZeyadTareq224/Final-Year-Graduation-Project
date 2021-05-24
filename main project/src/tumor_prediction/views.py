@@ -2,13 +2,20 @@ from django.shortcuts import render
 import requests
 import json
 import pandas as pd
-
 from .forms import BCTestForm
+from django.contrib.auth.decorators import login_required
+from users.decorators import doctor_required
+from clinics.models import Clinic
+from django.views.decorators.http import require_http_methods
 
 # Create your views here.
 
+@require_http_methods(['GET', 'POST'])
+@login_required(login_url="account_login")
+@doctor_required
 def BCTest(request):
-    API_ENDPOINT = 'http://127.0.0.1:5000/'
+    clinic = Clinic.objects.get(user=request.user)
+    API_ENDPOINT = 'http://127.0.0.1:5000/predict'
     HEADERS = {'Content-type': 'application/json'}
     PREDICTION = None
 
@@ -38,15 +45,16 @@ def BCTest(request):
                 "symmetry_mean": symmetry_mean,
                 "fractal_dimension_mean": fractal_dimension_mean
             }
-            #request_body = json.loads(obj)
+            
             response = requests.post(API_ENDPOINT, json=obj, headers=HEADERS)
+            print(response.json())
             PREDICTION = response.json()['classification']
             if PREDICTION == 1:
                 PREDICTION = 'Malignant '
             else:
                 PREDICTION = 'Benign'
             form.instance.classification = PREDICTION
-            form.instance.doctor = request.user
+            form.instance.clinic = clinic
             form.save()
 
 

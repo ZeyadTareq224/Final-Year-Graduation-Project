@@ -11,7 +11,7 @@ class Tag(models.Model):
 
 class Question(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=500)
     content = models.TextField()
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)

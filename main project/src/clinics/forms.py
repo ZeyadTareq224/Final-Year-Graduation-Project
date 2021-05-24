@@ -33,9 +33,3 @@ class PrescriptionForm(forms.ModelForm):
     class Meta:
         model = Prescription
         fields = ['symptoms', 'prescription']
-
-
-class PaymentForm(forms.ModelForm):
-    class Meta:
-        model = Payment
-        fields = ['paid', 'outstanding', 'total', 'payment_type']

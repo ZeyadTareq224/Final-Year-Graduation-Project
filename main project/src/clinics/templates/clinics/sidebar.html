@@ -34,22 +34,17 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item active" href="{% url 'clinics' %}">Clinics Board</a>
+                <a class="collapse-item active" href="{% url 'manage_appointments' %}">Manage Appointments
+                </a>
                 {% if request.user.is_normal_user %}
-                <a class="collapse-item active" href="{% url 'manage_appointments' %}">Manage Appointments</a>
+                <a class="collapse-item active" href="{% url 'medical_history' %}">Medical History
+                </a>
                 {% endif %}
                 {% if request.user.is_doctor %}
                     {% if request.user.clinic %}
                         <a class="collapse-item active" href="{% url 'clinic_details' request.user.clinic.id %}">My Clinic</a>
                     {% else %}
                         <a class="collapse-item active" href="{% url 'create_clinic' %}">Create Clinic</a>    
-                    {% endif %}
-                    {% if request.user.clinic %}
-                    <a class="collapse-item active" href="{% url 'manage_appointments' %}">Manage Appointments</a>
-                    {% endif %}
-                    {% if request.user.is_normal_user %}
-                    <a class="collapse-item active" href="{% url 'medical_history' %}">Medical History</a>
-                    <a class="collapse-item active" href="{% url 'patient_payment_history' %}">Payment History</a>
-
                     {% endif %}
                 {% endif %}    
             </div>
@@ -66,8 +61,11 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Main Navigations:</h6>
-                <a class="collapse-item" href="{% url 'home' %}">Home</a>
+                <h6 class="collapse-header">Main Navigations</h6>
+                <a class="collapse-item active" href="{% url 'home' %}">Home</a>
+                <a class="collapse-item" href="{% url 'clinics' %}">Clinics</a>
+                <a class="collapse-item" href="{% url 'questions' %}">Questions</a>
+                <a class="collapse-item" href="{% url 'drug_guide' %}">Drugs Guide</a>
             </div>
         </div>
     </li>

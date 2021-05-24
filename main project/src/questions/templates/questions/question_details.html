@@ -188,8 +188,12 @@
                     </div> 
                     <div class="row">
                         <div class="col-3">
-                            <form method="POST" action="{% url 'upvote' answer.id question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.upvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_up</span></button></form>
-                            <form method="POST" action="{% url 'downvote' answer.id question.id %}" style="display: inline-block;">{% csrf_token %}<strong>{{answer.downvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_down</span></button></form>
+                            <form method="POST" action="{% url 'upvote' answer.id question.id %}" style="display: inline-block;">
+                                {% csrf_token %}<strong>{{answer.upvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_up</span></button>
+                            </form>
+                            <form method="POST" action="{% url 'downvote' answer.id question.id %}" style="display: inline-block;">
+                                {% csrf_token %}<strong>{{answer.downvote_set.all.count}}</strong><button style="border: none; background-color: white;" class="m-auto" type="submit"><span class="material-icons">thumb_down</span></button>
+                            </form>
                         </div>
                     </div>
                 <p class="be-comment-text">
@@ -200,12 +204,14 @@
         </div>
         <hr>
         {% endfor %}
-        <form method="POST" class="form-block">
+        {% if request.user.is_doctor %}
+        <form method="POST" action="{% url 'add_answer' question.id %}" class="form-block">
                 {% csrf_token %}
                 {{answer_form|crispy}}
             
                 <input class="btn btn-primary" type="submit" value="Submit"/>
         </form>
+        {% endif %}
     </div>
 </div>
 </div>

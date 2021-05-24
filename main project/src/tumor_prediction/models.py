@@ -5,9 +5,7 @@ from clinics.models import Clinic
 User = get_user_model()
 
 class BCTest(models.Model):
-    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE)
-    patient = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    clinic = models.ForeignKey(Clinic , on_delete=models.CASCADE)
     radius_mean = models.CharField(max_length=255)
     texture_mean = models.CharField(max_length=255)
     perimeter_mean = models.CharField(max_length=255)
@@ -21,6 +19,4 @@ class BCTest(models.Model):
     classification = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.doctor.username}_test"
-    
-        
+        return f"{self.clinic.user}_test id:{self.id}"

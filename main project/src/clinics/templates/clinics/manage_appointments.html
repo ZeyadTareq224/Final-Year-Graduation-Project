@@ -120,7 +120,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{% url 'account_logout' %}" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -159,36 +159,35 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Status</th>
-                <th>Paied</th>
-                <th>Booked At</th>
+                <th>Requested At</th>
                 {% if request.user.is_doctor %}
                 <td>Action</td>
-                {% endif %}
+                {% endif %}                
             </tr>
         </thead>
         <tbody>
             {% for appointment in appointments %}
             <tr>
-                <td>{{appointment.patient}}</td>1
+                <td>{{appointment.patient}}</td>
                 <td>{{appointment.clinic}}</td>
                 <td>{{appointment.date}}</td>
                 <td>{{appointment.time}}</td>
                 <td>{{appointment.status}}</td>
-                <td>{{appointment.paied}}</td>
                 <td>{{appointment.created_at}}</td>
+                
                 {% if request.user.is_doctor %}
-                <td>
-                {% if appointment.status == "Pending"%}
-                <a class="btn btn-sm btn-success" href="{% url 'reschedule_appointment' appointment.id %}">Reschedule</a>
-                <a class="btn btn-sm btn-danger" href="{% url 'reject_appointment' appointment.id %}">Reject</a>
-                {% endif %}
-                {% if appointment.status == "Accepted" %}
-                <a class="btn btn-sm btn-primary" href="{% url 'add_prescription' appointment.patient.id appointment.id %}">Add Prescription</a>
-                {% if not appointment.paied %}
-                <a class="btn btn-sm btn-primary" href="{% url 'add_payment' appointment.id %}">Add Payment</a>
-                {% endif %}
-                {% endif %}
-                </td>
+                    <td>
+                    {% if appointment.status != "Closed" %}
+                    <a class="btn btn-sm btn-success" href="{% url 'reschedule_appointment' appointment.id %}">Reschedule
+                    </a>
+                    {% endif %}
+                    {% if appointment.status == "Accepted" %}
+                        <a class="btn btn-sm btn-primary" href="{% url 'add_prescription' appointment.patient.id appointment.id %}">Add Prescription
+                        </a>
+                        <a class="btn btn-sm btn-danger" href="{% url 'close_appointment' appointment.id %}">Close
+                        </a>
+                    {% endif %}
+                    </td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -201,9 +200,7 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Status</th>
-                <th>Paied</th>
-                <th>Booked At</th>
-                
+                <th>Requested At</th>
                 {% if request.user.is_doctor %}
                 <td>Action</td>
                 {% endif %}

@@ -1,0 +1,60 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section id="hero" class="hero-fullscreen parallax" data-overlay-dark="7">
+            <div class="background-image">
+                <img src="{% static 'site_assets/img/backgrounds/bg1.jpg' %}" alt="#">
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    {% include 'users/snippets/messages.html' %}
+
+                    <div class="hero-content-slider mt20" data-autoplay="true" data-speed="4000">
+
+                        <div>
+                            <strong><h1>User Profile</h1></strong>
+                            
+                            
+                        </div>
+
+                        <div>
+                            <strong><h1>User Profile</h1></strong>
+                            
+                        </div>
+
+                        <div>
+                            <strong><h1>User Profile</h1></strong>
+
+                        </div>
+                        
+                        <div>
+                            <strong><h1>User Profile</h1></strong>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section id="about" class="pt100 pb90">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 text-center pb20">
+                        <h2>BCCP<br><strong>Update Your Profile Info</strong></h2>
+                    </div>
+
+                    <div>
+                    	<form class="form-group" method="POST" action="{% url 'user_profile' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <input type="submit" class="btn btn-success" value="Submit">
+                            
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

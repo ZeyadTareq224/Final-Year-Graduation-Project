@@ -36,16 +36,17 @@
                                         <dt>Hosted on BCCP since:</dt> <dd>{{clinic.created_at|date}}</dd>
                                         
                                     </dl>
+
                                 </div>
-                                <div class="col-lg-7" id="cluster_info">
-                                    {% if request.user.is_doctor %}
-                                    <a class="btn btn-success" href="{% url 'patients_history' clinic.id %}">Patients History</a>
-                                    <a class="btn btn-success" href="{% url 'clinic_payment_history' clinic.id %}">Payment History</a>
-                                    {% endif %}
+                                {% if request.user == clinic.user %}
+                                <div>
+                                    <a class="btn btn-warning" href="{% url 'BCT_history' clinic.id %}">Breast Cancer Tests History</a>
                                 </div>
+                                {% endif %}
+                                
                             </div>
                             <hr>
-                            <h3>Clinic Review Comments</h3>
+                            <h3>Clinic Review Comments ({{reviews.count}})</h3>
                             <br>
                             <div class="row m-t-sm">
                                 <div class="col-lg-12">
@@ -76,7 +77,7 @@
                                         {% endfor %}
                                         {% if request.user != clinic.user %}
                                         <h3>Add Review</h3>
-                                        <form method="POST">
+                                        <form action="{% url 'add_clinic_review' clinic.id %}" method="POST">
                                             {% csrf_token %}
                                             {{form|crispy}}
                                             <input class="btn btn-primary" type="submit">
@@ -104,10 +105,13 @@
                         {{clinic.description}}
                     </p>
                     
-                    {% if request.user != clinic.user %}
+                    {% if request.user != clinic.user and patient_appointment_count == 0 %}
                     <div class="text-center m-t-md">
                         
-                        <form method="POST", action="{% url 'create_appointment' clinic.id %}">{% csrf_token %}<input type="submit" class="btn btn-block btn-primary" value="Book Appointment"></form>
+                        <form method="POST", action="{% url 'create_appointment' clinic.id %}">{% csrf_token %}
+                            <input type="submit" class="btn btn-block btn-primary" value="Book Appointment"/>
+                            
+                        </form>
                     </div>
                     {% endif %}
                 </div>

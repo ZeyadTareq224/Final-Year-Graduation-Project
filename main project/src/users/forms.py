@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.contrib.auth import get_user_model
-
+from .models import Profile
 
 class DoctorSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -25,3 +25,9 @@ class NormalUserSignUpForm(UserCreationForm):
         user.is_normal_user = True
         user.save()
         return user
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        exclude = ['user']

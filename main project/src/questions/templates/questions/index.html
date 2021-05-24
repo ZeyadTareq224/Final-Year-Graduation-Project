@@ -1,6 +1,8 @@
 {% extends 'questions/base.html' %}
 {% block content %}
-
+{% if not questions %}
+    <h1>No Questions To Show Yet!</h1>
+{% else %}
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Questions</h1>
 </div>
@@ -23,15 +25,21 @@
                         aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">Question Management:</div>
                         <a class="dropdown-item" href="{% url 'question-details' question.id %}">Read More</a>
+                        {% if request.user.is_normal_user %}
                         <a class="dropdown-item" href="{% url 'update-question' question.id %}">Update</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'delete-question' question.id %}">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                {{question.content}}
+                {% if question.content|length > 80 %}
+                    {{question.content|slice:80}} ...
+                    {% else %}
+                    {{question.content}}
+                {% endif %}
                 <hr>
             Tags: 
             {% for tag in question.tags.all %}
@@ -45,5 +53,5 @@
     </div>
 </div>
 
-
+{% endif %}
 {% endblock %}

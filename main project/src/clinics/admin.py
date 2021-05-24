@@ -6,5 +6,4 @@ admin.site.register(Clinic)
 admin.site.register(ClinicReview)
 admin.site.register(Appointment)
 admin.site.register(Prescription)
-admin.site.register(Payment)
 

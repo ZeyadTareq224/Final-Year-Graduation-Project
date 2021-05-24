@@ -1,0 +1,14 @@
+{% extends 'clinics/base.html' %}
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">Symptoms</h1>
+  <p class="lead">
+  	{{prescription.symptoms}}
+  </p>
+  <hr class="my-4">
+  <h1 class="display-4">Prescription</h1>
+  <p class="lead">
+  	{{prescription.prescription}}
+  </p>
+</div>
+{% endblock %}

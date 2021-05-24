@@ -2,8 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from .models import Answer, Question, UpVote, DownVote
 from .forms import QuestionForm, AnswerForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from users.decorators import doctor_required, normal_user_required
+from django.db.models import Q
+from django.views.decorators.http import require_http_methods
 
 
+@require_http_methods(['GET'])
+@login_required(login_url="account_login")
 def list_questions(request):
     questions = Question.objects.all()
     
@@ -11,6 +17,10 @@ def list_questions(request):
     return render(request, 'questions/index.html', context)
 
 
+
+@require_http_methods(['GET', 'POST'])
+@login_required(login_url="account_login")
+@normal_user_required
 def create_question(request):
     form = QuestionForm()
     if request.method == "POST":
@@ -24,20 +34,12 @@ def create_question(request):
     return render(request, 'questions/QuestionForm.html', context)
 
 
+@require_http_methods(['GET'])
+@login_required(login_url="account_login")
 def question_details(request, pk):
     question = get_object_or_404(Question, id=pk)
     answers = Answer.objects.filter(question=question).order_by("-created_at")
-
     answer_form = AnswerForm()
-    if request.method == "POST":
-        answer_form = AnswerForm(request.POST)
-        if answer_form.is_valid():
-            answer_form.instance.user = request.user
-            answer_form.instance.question = question
-            answer_form.save()
-            messages.success(request, "Answer Added Successfuly.")
-            return redirect("question-details", question.id)
-
     context = {
         'question': question,
         'answers': answers,
@@ -47,8 +49,31 @@ def question_details(request, pk):
     return render(request, 'questions/question_details.html', context)
 
 
+@require_http_methods(['POST'])
+@login_required(login_url="account_login")
+@doctor_required
+def add_answer(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    if request.user.is_normal_user:
+        return render(request, 'questions/request_errors/request_unauthorized.html', status=401)
+    if request.method == "POST":
+        answer_form = AnswerForm(request.POST)
+        if answer_form.is_valid():
+            answer_form.instance.user = request.user
+            answer_form.instance.question = question
+            answer_form.save()
+            messages.success(request, "Answer Added Successfuly.")
+            return redirect("question-details", question.id)
+
+
+
+@require_http_methods(['GET', 'POST', 'PUT'])
+@login_required(login_url="account_login")
+@normal_user_required
 def update_question(request, question_id):
     question = get_object_or_404(Question, id=question_id)
+    if request.user.is_doctor:
+        return render(request, 'questions/request_errors/request_unauthorized.html', status=401)
     if request.user==question.user:
         form = QuestionForm(instance=question)
         if request.method=="POST":
@@ -63,9 +88,12 @@ def update_question(request, question_id):
     return render(request, 'questions/QuestionForm.html', context)
 
 
+
+@require_http_methods(['GET', 'POST'])
+@login_required(login_url="account_login")
+@normal_user_required
 def delete_question(request, question_id):
     question = get_object_or_404(Question, id=question_id)
-    print("hahahahah")
     if request.user == question.user:
         if request.method == "POST":
             question.delete()
@@ -78,6 +106,8 @@ def delete_question(request, question_id):
     return render(request, 'questions/delete_question.html', context)
 
 
+@require_http_methods(['GET', 'POST'])
+@login_required(login_url="account_login")
 def upvote(request, answer_id, question_id):
     answer = get_object_or_404(Answer, id=answer_id)
     user = request.user
@@ -103,6 +133,8 @@ def upvote(request, answer_id, question_id):
     
 
 
+@require_http_methods(['GET', 'POST'])
+@login_required(login_url="account_login")
 def downvote(request, answer_id, question_id):
     answer = get_object_or_404(Answer, id=answer_id)
     user = request.user
@@ -126,6 +158,10 @@ def downvote(request, answer_id, question_id):
     return redirect("question-details", question_id)
 
 
+
+@require_http_methods(['GET', 'POST', 'PUT'])
+@login_required(login_url="account_login")
+@doctor_required
 def update_answer(request, answer_id, question_id):
     
     answer = get_object_or_404(Answer, id=answer_id)
@@ -142,6 +178,11 @@ def update_answer(request, answer_id, question_id):
         }
     return render(request, 'questions/answer_form.html', context)
 
+
+
+@require_http_methods(['GET', 'POST'])
+@login_required(login_url="account_login")
+@doctor_required
 def delete_answer(request, answer_id, question_id):
     answer = get_object_or_404(Answer, id=answer_id)
     if request.method == "POST" and request.user == answer.user:
@@ -154,11 +195,13 @@ def delete_answer(request, answer_id, question_id):
     return render(request, 'questions/delete_answer.html', context)
 
 
+@require_http_methods(['GET'])
+@login_required(login_url="account_login")
 def search(request):
     if request.method == "GET":
         query = request.GET.get('search_query', None)
         if query:
-            questions = Question.objects.filter(title__icontains=query)
+            questions = Question.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
             
             context = {'questions':questions}
             return render(request, 'questions/question_search.html', context)

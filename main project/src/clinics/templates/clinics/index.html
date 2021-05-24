@@ -2,10 +2,12 @@
 {% load static %}
 {% block content %}
 {% if not clinics %}
-    <h1>No Clinics To Show Yey!</h1>
+    <h1>No Clinics To Show Yet!</h1>
 {% else %}
 
-
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Questions</h1>
+</div>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'clinics/css/clinics_list.css' %}">
 <div class="container">
@@ -47,5 +49,6 @@
 	</div>
 </div>
 {% endif %}
+
 {% endblock %}
     

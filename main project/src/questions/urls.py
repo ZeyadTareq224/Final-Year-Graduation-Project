@@ -14,6 +14,7 @@ urlpatterns = [
     path('downvote/<int:answer_id>/<int:question_id>/', views.downvote, name="downvote"),
 
     # answers urls
+    path('add-answer/<int:question_id>', views.add_answer, name="add_answer"),
     path('update-answer/<int:answer_id>/<int:question_id>/', views.update_answer, name="update_answer"),
     path('delete-answer/<int:answer_id>/<int:question_id>/', views.delete_answer, name="delete_answer"),
 
