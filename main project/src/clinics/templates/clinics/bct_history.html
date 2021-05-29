@@ -107,7 +107,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{% url 'user_profile' %}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -155,6 +155,7 @@
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
+            <th>Patient Name</th>
             <th>Clinic Name</th>
             <th>Radius Mean</th>
             <th>Texture Mean</th>
@@ -166,24 +167,25 @@
             <th>Concave Points Mean</th>
             <th>Symmetry Mean</th>
             <th>Fractal Dimension Mean</th>
-            <th>Classification</th>
+            <th>Result</th>
         </tr>
     </thead>
     <tbody>
         {% for bctest in bctests %}
         <tr>
-            <th>{{bctest.clinic}}</th>
-            <th>{{bctest.radius_mean}}</th>
-            <th>{{bctest.texture_mean}}</th>
-            <th>{{bctest.perimeter_mean}}</th>
-            <th>{{bctest.area_mean}}</th>
-            <th>{{bctest.smoothness_mean}}</th>
-            <th>{{bctest.compactness_mean}}</th>
-            <th>{{bctest.concavity_mean}}</th>
-            <th>{{bctest.concave_points_mean}}</th>
-            <th>{{bctest.symmetry_mean}}</th>
-            <th>{{bctest.fractal_dimension_mean}}</th>
-            <th>{{bctest.classification}}</th>
+            <td>{{bctest.patient_name}}</td>
+            <td>{{bctest.clinic}}</td>
+            <td>{{bctest.radius_mean}}</td>
+            <td>{{bctest.texture_mean}}</td>
+            <td>{{bctest.perimeter_mean}}</td>
+            <td>{{bctest.area_mean}}</td>
+            <td>{{bctest.smoothness_mean}}</td>
+            <td>{{bctest.compactness_mean}}</td>
+            <td>{{bctest.concavity_mean}}</td>
+            <td>{{bctest.concave_points_mean}}</td>
+            <td>{{bctest.symmetry_mean}}</td>
+            <td>{{bctest.fractal_dimension_mean}}</td>
+            <td>{{bctest.classification}}</td>
             
         </tr>
         {% endfor %}
@@ -191,6 +193,7 @@
     </tbody>
     <tfoot>
         <tr>
+            <th>Patient Name</th>
             <th>Clinic Name</th>
             <th>Radius Mean</th>
             <th>Texture Mean</th>
@@ -202,7 +205,7 @@
             <th>Concave Points Mean</th>
             <th>Symmetry Mean</th>
             <th>Fractal Dimension Mean</th>
-            <th>Classification</th>
+            <th>Result</th>
         </tr>
     </tfoot>
 </table>

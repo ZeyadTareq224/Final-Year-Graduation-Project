@@ -6,6 +6,8 @@ class BCTestForm(ModelForm):
     class Meta:
         model = BCTest
         fields = [
+
+            'patient_name',
             'radius_mean',
             'texture_mean',
             'perimeter_mean',

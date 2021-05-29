@@ -47,7 +47,7 @@ def BCTest(request):
             }
             
             response = requests.post(API_ENDPOINT, json=obj, headers=HEADERS)
-            print(response.json())
+            
             PREDICTION = response.json()['classification']
             if PREDICTION == 1:
                 PREDICTION = 'Malignant '

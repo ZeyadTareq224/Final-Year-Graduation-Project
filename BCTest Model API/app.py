@@ -37,7 +37,6 @@ def index():
 		symmetry_mean,
 		fractal_dimension_mean
 		]]
-	print("X_new = ",x_new)
 	x_new_columns = [
 		'radius_mean',
 		'texture_mean',
@@ -55,8 +54,7 @@ def index():
 	result = model[4].predict(x_new_final)
 
 	classification = int(result[0])
-	print(type(classification))
-	print("class: ", classification)
+	
 	response = {
 		'classification': classification,
 	}

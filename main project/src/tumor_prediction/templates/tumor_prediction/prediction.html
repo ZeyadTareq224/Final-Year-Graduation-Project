@@ -87,20 +87,23 @@
 <div class="main" id="main">
     <a href="" class="btn btn-lg btn-primary btn-scroll">Get Instructions</a>
 
-    <center><h2 id="titlePredict">Make Your Prediction <span class="material-icons">
-        science
-        </span></h2> </center>
+    <center>
+        <h2 id="titlePredict">Make Your Prediction 
+            <span class="material-icons">science</span>
+        </h2>
+    </center>
+    <center>
     <div class="row">
         <div class="container">
             <form method="post">
                 {% csrf_token %}
-                <div class="form-row">
+                <div class="row">
                     <div class="card">
                         <div class="card-body">
                             <table id="tableMain">
                                 <tr>
                                     {% for field in form %}  
-                                    <div class="form-group col-md-6 mb-0">
+                                    <div class="form-group col-md-1 mb-0">
                                         <tr id="particular">
                                             <td id="particular">{{ field|as_crispy_field }}</td>
                                         </tr>
@@ -129,8 +132,8 @@
             </tr>
         </table>
     </div>
-    <br>
-    <br>
+    </center>
+
     <br>
     <hr>
 </div>

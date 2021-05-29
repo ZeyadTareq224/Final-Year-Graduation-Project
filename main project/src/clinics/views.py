@@ -25,7 +25,7 @@ def clinics(request):
 @login_required(login_url="account_login")
 @doctor_required   
 def create_clinic(request):
-    user_clinic = Clinic.objects.get(user=request.user)
+    user_clinic = Clinic.objects.filter(user=request.user)
     if not user_clinic:
         form = ClinicForm()
         if request.method == "POST":
@@ -103,6 +103,7 @@ def search(request):
 
 
 @require_http_methods(['GET', 'POST'])
+@normal_user_required
 @login_required(login_url="account_login")
 def create_appointment(request, clinic_id): 
     clinic = Clinic.objects.get(id=clinic_id)
