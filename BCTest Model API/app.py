@@ -5,12 +5,12 @@ from flask import Flask, request, jsonify
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = os.path.join(BASE_DIR, 'BCXGBoost.pickle')
-
+MODEL2_PATH = os.path.join(BASE_DIR, 'LRM.pickle')
 app = Flask(__name__)
 
 
 
-@app.route('/predict',methods=['POST'])
+@app.route('/predict1',methods=['POST'])
 def index():
 	body = request.get_json()
 	radius_mean = float(body.get('radius_mean', None))
@@ -59,3 +59,56 @@ def index():
 		'classification': classification,
 	}
 	return jsonify(response)
+
+
+
+@app.route('/predict2',methods=['POST'])
+def friendlyModel():
+	body = request.get_json()
+
+	Clump_Thickness = int(body.get('Clump_Thickness', None))
+	Uniformity_of_Cell_Size = int(body.get('Uniformity_of_Cell_Size', None))
+	Uniformity_of_Cell_Shape = int(body.get('Uniformity_of_Cell_Shape', None))
+	Marginal_Adhesion = int(body.get('Marginal_Adhesion', None))
+	Single_Epithelial_Cell_Size = int(body.get('Single_Epithelial_Cell_Size', None))
+	Bare_Nuclei = int(body.get('Bare_Nuclei', None))
+	Bland_Chromatin = int(body.get('Bland_Chromatin', None))
+	Normal_Nucleoli = int(body.get('Normal_Nucleoli', None))
+	Mitoses = int(body.get('Mitoses', None))
+
+	
+	lrm = pd.read_pickle(MODEL2_PATH)
+	
+	x_new = [[
+		Clump_Thickness,
+		Uniformity_of_Cell_Size,
+		Uniformity_of_Cell_Shape,
+		Marginal_Adhesion,
+		Single_Epithelial_Cell_Size,
+		Bare_Nuclei,
+		Bland_Chromatin,
+		Normal_Nucleoli,
+		Mitoses
+		]]
+
+	x_new_columns = [
+		'Clump Thickness',
+		'Uniformity of Cell Size',
+		'Uniformity of Cell Shape',
+	    'Marginal Adhesion', 
+	    'Single Epithelial Cell Size', 
+	    'Bare Nuclei', 
+	    'Bland Chromatin',
+	    'Normal Nucleoli', 
+	    'Mitoses'
+    ]	
+	x_new_final = pd.DataFrame(x_new, columns=x_new_columns)
+
+	result = lrm.predict(x_new_final)[0]
+	print(result)
+	
+	response = {
+		'classification': int(result),
+	}
+	return jsonify(response)
+	

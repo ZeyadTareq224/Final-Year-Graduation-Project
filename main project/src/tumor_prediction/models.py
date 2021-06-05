@@ -21,3 +21,21 @@ class BCTest(models.Model):
 
     def __str__(self):
         return f"{self.clinic}_test id:{self.id}"
+
+
+class BCTestFriendly(models.Model):
+    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE, null=True)
+    Clump_Thickness = models.CharField(max_length=256)
+    Uniformity_of_Cell_Size = models.CharField(max_length=256)
+    Uniformity_of_Cell_Shape = models.CharField(max_length=256)
+    Marginal_Adhesion = models.CharField(max_length=256)
+    Single_Epithelial_Cell_Size = models.CharField(max_length=256)
+    Bare_Nuclei = models.CharField(max_length=256)
+    Bland_Chromatin = models.CharField(max_length=256)
+    Normal_Nucleoli = models.CharField(max_length=256)
+    Mitoses = models.CharField(max_length=256)
+    classification = models.CharField(max_length=256, blank=True, null=True)
+    patient_name = models.CharField(max_length=256, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.clinic}_test id:{self.id}"        

@@ -1,0 +1,81 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'site_assets/css/predictions.css' %}">
+</head>
+<style>
+    body{background-color: #ffffff;}
+</style>
+
+<section id="hero" class="hero-fullscreen parallax" data-overlay-dark="7">
+    <div class="background-image">
+        <img src="{% static 'site_assets/img/backgrounds/bg1.jpg' %}" alt="#">
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            {% include 'users/snippets/messages.html' %}
+            
+            <div class="hero-content-slider mt20" data-autoplay="true" data-speed="4000">
+                
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+                
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+                
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+                
+                <div>
+                    <h1>BCCP<br><strong>AI Advice.</strong></h1>
+                    <p class="lead">Get predictions for Breast Cancer Tumors from our AI.</p>
+                    <a href="#about" class="btn btn-lg btn-primary btn-scroll">Get Started</a>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<section id="about" class="pt100 pb90">
+    <div class="container">
+        <h2><strong>CHOOSE THE SUITABLE TEST FOR YOU</strong></h2>
+        <div class="row">
+            <center>
+            <div class="btn btn-lg" style="font-size: medium; text-align: center;" >
+                <a href="{% url 'BCTest' %}">Breast Cancer Test Using FNA Analysis</a>
+            </div>
+            <div class="btn btn-lg" style="font-size: medium; text-align: center;" >
+                <a href="{% url 'Friendly_BCTest' %}">Breast Cancer Test Using Cancer Cell Analysis</a>
+            </div>
+            </center>
+            
+            
+            
+            
+        </div>
+        
+    </div>
+</div>
+
+</section>
+
+
+
+{% endblock %}

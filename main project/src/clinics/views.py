@@ -7,7 +7,7 @@ from django.db.models import Q
 import datetime
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
-from tumor_prediction.models import BCTest
+from tumor_prediction.models import BCTest, BCTestFriendly
 from .drugs_scrapper import drugs1, drugs2, drugs3 
 from django.contrib.auth.decorators import login_required
 from users.decorators import doctor_required, normal_user_required
@@ -229,6 +229,15 @@ def BCT_history(request, clinic_id):
     bctests = BCTest.objects.filter(clinic=clinic)
     context = {'bctests': bctests}
     return render(request, 'clinics/bct_history.html', context)
+
+@require_http_methods(['GET'])
+@login_required(login_url="account_login")
+@doctor_required
+def BCT_history_cell_analysis(request, clinic_id):
+    clinic = Clinic.objects.get(id=clinic_id)
+    bctests_cell_analysis = BCTestFriendly.objects.filter(clinic=clinic)
+    context = {'bctests': bctests_cell_analysis}
+    return render(request, 'clinics/bct_history_cell_analysis.html', context)
 
 @require_http_methods(['GET'])
 @login_required(login_url="account_login")

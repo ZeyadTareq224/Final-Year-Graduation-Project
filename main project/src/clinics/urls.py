@@ -27,6 +27,7 @@ urlpatterns = [
     
 
 
-    path('bctest/history/<int:clinic_id>', views.BCT_history, name="BCT_history"),
+    path('bctest/history/FNA-analysis/<int:clinic_id>', views.BCT_history, name="BCT_history"),
+    path('bctest/history/cell-analysis/<int:clinic_id>', views.BCT_history_cell_analysis, name="BCT_history_cell_analysis"),
     path('drugs-guide/', views.drugs_guide, name="drug_guide"),
 ]

@@ -40,7 +40,8 @@
                             </div>
                             {% if request.user == clinic.user %}
                             <div>
-                                <a class="btn btn-warning" href="{% url 'BCT_history' clinic.id %}">Breast Cancer Tests History</a>
+                                <a class="btn btn-warning" href="{% url 'BCT_history' clinic.id %}">Breast Cancer FNA Tests History</a>
+                                <a class="btn btn-warning" href="{% url 'BCT_history_cell_analysis' clinic.id %}">Breast Cancer Cell Tests History</a>
                             </div>
                             {% endif %}
 

@@ -29,7 +29,7 @@
                                 <div class="col-md-3 mg-col">
                                     <ul>
                                         {% if request.user.is_doctor %}
-                                        <li><a href="{% url 'BCTest' %}">AI Advice</a></li>
+                                        <li><a href="{% url 'ai_advice' %}">AI Advice</a></li>
                                         {% endif %}
                                         <li><a href="{% url 'questions' %}">Q&A Section</a></li>
                                         <li><a href="{% url 'clinics' %}">Clinics Center</a></li>
