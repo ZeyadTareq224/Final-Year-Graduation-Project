@@ -157,7 +157,9 @@ def manage_appointments(request):
         appointments = Appointment.objects.filter(Q(patient=request.user), ~Q(status="Closed"))
 
     if request.user.is_doctor:
-        clinic = Clinic.objects.get(user=request.user)
+        clinic = Clinic.objects.filter(user=request.user)[0]
+        if not Clinic.objects.filter(user=request.user).exists():
+            return render(request, 'clinics/request_errors/create_clinic_first.html')
         appointments = Appointment.objects.filter(clinic=clinic)
         
     context = {'appointments': appointments}

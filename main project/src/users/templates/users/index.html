@@ -153,6 +153,7 @@
                         <p class="lead">Our highly skilled <span class="color">professional</span> services.</p>
                     </div>
                     
+                    {% if request.user.is_doctor %}
                     <div class="col-md-4 col-sm-6 feature-left">
 	                    <i class="icon-telescope size-3x color"></i>
 	                    <i class="icon-telescope back-icon"></i>
@@ -162,6 +163,7 @@
                             <a href="{% url 'ai_advice' %}" class="btn btn-md btn-ghost">Take Me There</a>
 	                    </div>
                     </div>
+                    {% endif %}
                     
                     <div class="col-md-4 col-sm-6 feature-left">
                         <i class="icon-circle-compass size-3x color"></i>

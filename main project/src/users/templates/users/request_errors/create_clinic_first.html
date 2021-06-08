@@ -1,0 +1,10 @@
+{% extends 'users/registration/base.html' %}
+{% block content %}
+<center>
+    <img class="img-fluid" src="https://img.pngio.com/doctor-office-png-free-doctor-officepng-transparent-images-doctors-office-png-650_615.png" alt="">
+    <br>
+    <h3>This is not an error</h3>
+    <p>In order to view this page you need to have a clinic on the system first.</p>
+    <a class="btn btn-outline-info" href="{% url 'create_clinic' %}">Create your clinic now</a>
+</center>
+{% endblock %}

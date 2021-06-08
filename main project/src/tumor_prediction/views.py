@@ -13,7 +13,8 @@ from django.views.decorators.http import require_http_methods
 @login_required(login_url="account_login")
 @doctor_required
 def ai_advice(request):
-    
+    if request.user.is_normal_user or not Clinic.objects.filter(user=request.user).exists():
+        return render(request, 'users/request_errors/create_clinic_first.html')
     return render(request, 'tumor_prediction/ai_advice.html')
 
 
@@ -68,8 +69,14 @@ def BCTest(request):
     context = {'form': form, 'prediction': PREDICTION}       
     return render(request, 'tumor_prediction/prediction.html', context)
 
+
+@require_http_methods(['GET', 'POST'])
+@login_required(login_url="account_login")
+@doctor_required
 def Friendly_BCTest(request):
-    clinic = Clinic.objects.get(user=request.user)
+    clinic = Clinic.objects.filter(user=request.user)
+    if not clinic.exists():
+        return render(request, 'users/request_errors/create_clinic_first.html')
     API_ENDPOINT = 'http://127.0.0.1:5000/predict2'
     HEADERS = {'Content-type': 'application/json'}
     PREDICTION = None
