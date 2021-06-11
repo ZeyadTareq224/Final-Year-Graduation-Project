@@ -34,6 +34,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item active" href="{% url 'questions' %}">Questions Board</a>
                 {% if request.user.is_normal_user %}
+                <a class="collapse-item active" href="{% url 'my_questions' %}">My Questions</a>
                 <a class="collapse-item active" href="{% url 'question-create' %}">Create Question</a>
                 {% endif %}
             </div>

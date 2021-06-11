@@ -206,3 +206,15 @@ def search(request):
             context = {'questions':questions}
             return render(request, 'questions/question_search.html', context)
         return render(request, 'questions/question_search.html')
+
+
+def my_questions(request):
+    if request.user.is_normal_user:
+        questions = Question.objects.filter(user=request.user)
+    else: 
+        return render(request, 'questions/request_errors/request_unauthorized.html')    
+
+    context = {
+        'questions':questions
+    }
+    return render(request, 'questions/my_questions.html', context)

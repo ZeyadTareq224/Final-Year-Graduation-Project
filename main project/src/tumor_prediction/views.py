@@ -114,7 +114,7 @@ def Friendly_BCTest(request):
             else:
                 PREDICTION = 'Benign'
             form.instance.classification = PREDICTION
-            form.instance.clinic = clinic
+            form.instance.clinic = clinic[0]
             form.save()
 
 

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.contrib.auth import get_user_model
 from .models import Profile
+from .models import User
 
 class DoctorSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -20,6 +21,12 @@ class NormalUserSignUpForm(UserCreationForm):
         model = get_user_model()
         fields = ['username', 'email', 'password1', 'password2']
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError('A user has already registered using this email')
+        return email
+        
     def save(self):
         user = super().save(commit=False)
         user.is_normal_user = True
