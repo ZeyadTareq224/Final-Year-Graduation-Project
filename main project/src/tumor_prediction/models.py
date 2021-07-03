@@ -38,4 +38,4 @@ class BCTestFriendly(models.Model):
     patient_name = models.CharField(max_length=256, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.clinic}_test id:{self.id}"        
+        return f"{self.clinic}_test id:{self.id}"

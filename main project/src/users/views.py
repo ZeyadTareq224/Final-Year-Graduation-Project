@@ -26,7 +26,6 @@ def doctor_signup(request):
         form = DoctorSignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            
             return redirect ('account_login')
     context = {'form': form}        
     return render(request, 'users/registration/signup_form.html', context)

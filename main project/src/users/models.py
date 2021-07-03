@@ -42,3 +42,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+
+
+
+class ApprovedDoctors(models.Model):
+    syndicate_id = models.IntegerField(unique=True)
+    
+
+    def __str__(self):
+        return f"{self.syndicate_id}"

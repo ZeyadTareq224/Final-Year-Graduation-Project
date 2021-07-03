@@ -55,6 +55,7 @@ class ClinicReview(models.Model):
     rating = models.CharField(choices=RATING, max_length=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
     def __str__(self):
         return f"{self.patient}'s review on {self.clinic}"
 
