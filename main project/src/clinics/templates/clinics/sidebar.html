@@ -34,8 +34,10 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item active" href="{% url 'clinics' %}">Clinics Board</a>
+                {% if request.user.clinic or request.user.is_normal_user %}
                 <a class="collapse-item active" href="{% url 'manage_appointments' %}">Manage Appointments
                 </a>
+                {% endif %}
                 {% if request.user.is_normal_user %}
                 <a class="collapse-item active" href="{% url 'medical_history' %}">Medical History
                 </a>

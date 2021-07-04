@@ -33,7 +33,7 @@ def doctor_signup(request):
 
 @require_http_methods(['GET', 'POST'])
 def normal_user_signup(request):
-    form = DoctorSignUpForm()
+    form = NormalUserSignUpForm()
     if request.method == "POST":
         form = NormalUserSignUpForm(request.POST)
         if form.is_valid():
