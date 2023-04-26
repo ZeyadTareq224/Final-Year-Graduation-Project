@@ -17,5 +17,24 @@
 
 ## Installation
 ##### Clone the repository:
-`git clone https://github.com/ZeyadTareq224/Final-Year-Graduation-Project.git
-cd bcda`
+`git clone https://github.com/ZeyadTareq224/Final-Year-Graduation-Project.git`
+`cd Final-Year-Graduation-Project/main project/src`
+
+##### Install the requirements:
+`pip install -r requirements.txt`
+
+##### Run the migrations:
+`python manage.py migrate`
+
+##### Start the development server:
+`python manage.py runserver`
+
+##### Visit http://localhost:8000 in your browser to access the application.
+
+
+## Contributing
+
+If you'd like to contribute to BCDA, please fork the repository and create a pull request. We welcome contributions in the form of bug fixes, new features, and documentation improvements.
+
+## License
+BCDA is licensed under the MIT License. See LICENSE for more information.
