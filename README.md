@@ -10,8 +10,8 @@
 #### Consultations: This module provides a platform for patients and doctors to hold conversations and consultations. It is built using Django.
 
 ## Requirements
-Python 3.7 or higher
-Django 3.0 or higher
-Flask 1.1.1 or higher
-Beautiful Soup 4.9.3 or higher
+##### Python 3.7 or higher
+##### Django 3.0 or higher
+##### Flask 1.1.1 or higher
+##### Beautiful Soup 4.9.3 or higher
 Installation
