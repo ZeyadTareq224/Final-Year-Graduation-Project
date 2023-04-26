@@ -14,4 +14,8 @@
 ##### Django 3.0 or higher
 ##### Flask 1.1.1 or higher
 ##### Beautiful Soup 4.9.3 or higher
-Installation
+
+## Installation
+##### Clone the repository:
+`git clone https://github.com/ZeyadTareq224/Final-Year-Graduation-Project.git
+cd bcda`
